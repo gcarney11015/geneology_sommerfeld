@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f042e296642aa1f6abbd33147719b829 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var layerControl = document.querySelector('.leaflet-control-layers');
+            if (layerControl) {
+                var selectAllDiv = document.createElement('div');
+                selectAllDiv.style.padding = '6px 10px 6px 6px';
+                selectAllDiv.style.borderBottom = '1px solid #ddd';
+                selectAllDiv.style.marginBottom = '5px';
+                selectAllDiv.style.backgroundColor = '#f8f8f8';
+                
+                var checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = 'select-all-layers';
+                checkbox.checked = true;
+                checkbox.style.marginRight = '5px';
+                
+                var label = document.createElement('label');
+                label.htmlFor = 'select-all-layers';
+                label.innerHTML = '<b>Toggle All Layers</b>';
+                label.style.cursor = 'pointer';
+                label.style.fontSize = '13px';
+                
+                selectAllDiv.appendChild(checkbox);
+                selectAllDiv.appendChild(label);
+                
+                var overlaysList = layerControl.querySelector('.leaflet-control-layers-overlays');
+                if (overlaysList) {
+                    overlaysList.insertBefore(selectAllDiv, overlaysList.firstChild);
+                }
+                
+                checkbox.addEventListener('change', function() {
+                    var checkboxes = overlaysList.querySelectorAll('input[type="checkbox"]:not(#select-all-layers)');
+                    checkboxes.forEach(function(cb) {
+                        if (cb.checked !== checkbox.checked) {
+                            cb.click();
+                        }
+                    });
+                });
+            }
+        }, 500);
+    });
+    </script>
+    
+    
+    <div style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1000; 
+                background-color: white; padding: 10px 20px; border: 2px solid #0066cc; 
+                border-radius: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
+        <div style="font-weight: bold; font-size: 16px; color: #0066cc;">
+            🌍 Immigration Point Ancestors
+        </div>
+        <div style="font-size: 12px; color: #666; margin-top: 3px;">
+            Origins outside US/Colonies • Color-coded by family line
+        </div>
+    </div>
+    
+    
+        <div style="position: fixed; top: 10px; right: 60px; z-index: 1000; background-color: white; 
+                    padding: 10px; border: 2px solid #ccc; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+                    touch-action: manipulation; -webkit-tap-highlight-color: transparent;">
+            <div style="font-weight: bold; margin-bottom: 5px; font-size: 14px;">View by:</div>
+        <div style="padding: 3px 0; font-weight: bold; color: #0066cc;">▶ Immigration Origins</div><hr style="margin: 5px 0; border: 0; border-top: 1px solid #ddd;"><div style="padding: 3px 0;"><a href="family_locations_map_great-grandparents.html" style="display: block; text-decoration: none; color: #0066cc; padding: 5px; margin: -5px; cursor: pointer; -webkit-tap-highlight-color: rgba(0,102,204,0.3);">Great Grandparents</a></div><div style="padding: 3px 0;"><a href="family_locations_map_century.html" style="display: block; text-decoration: none; color: #0066cc; padding: 5px; margin: -5px; cursor: pointer; -webkit-tap-highlight-color: rgba(0,102,204,0.3);">Century</a></div><div style="padding: 3px 0;"><a href="family_locations_map_surname.html" style="display: block; text-decoration: none; color: #0066cc; padding: 5px; margin: -5px; cursor: pointer; -webkit-tap-highlight-color: rgba(0,102,204,0.3);">Surname</a></div><div style="padding: 3px 0;"><a href="family_locations_map_region.html" style="display: block; text-decoration: none; color: #0066cc; padding: 5px; margin: -5px; cursor: pointer; -webkit-tap-highlight-color: rgba(0,102,204,0.3);">Region</a></div></div>
+    
+            <div class="folium-map" id="map_f042e296642aa1f6abbd33147719b829" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f042e296642aa1f6abbd33147719b829 = L.map(
+                "map_f042e296642aa1f6abbd33147719b829",
+                {
+                    center: [51.10530829736843, 23.07872187894736],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 3,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_161b82e85e44c1e03aff2ab289403aa1 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_161b82e85e44c1e03aff2ab289403aa1.addTo(map_f042e296642aa1f6abbd33147719b829);
+        
+    
+            var marker_cluster_3fe5b5093eccd87b979c743f7480af17 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            marker_cluster_3fe5b5093eccd87b979c743f7480af17.addTo(map_f042e296642aa1f6abbd33147719b829);
+        
+    
+            var marker_cluster_2575407c08edb6cb4ee0917d0a2becff = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            marker_cluster_2575407c08edb6cb4ee0917d0a2becff.addTo(map_f042e296642aa1f6abbd33147719b829);
+        
+    
+            var marker_cluster_f4c87850785ac802ec8a8e001875fa97 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            marker_cluster_f4c87850785ac802ec8a8e001875fa97.addTo(map_f042e296642aa1f6abbd33147719b829);
+        
+    
+            var marker_cluster_34a5af5d7d4c26b9430ff19f7aeb7a5a = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_c82bdbf6d249e4d13683ba11bdf39f1b = L.marker(
+                [51.0449814, -1.2433133],
+                {
+}
+            ).addTo(marker_cluster_34a5af5d7d4c26b9430ff19f7aeb7a5a);
+        
+    
+            var icon_e37f7e80b95b788c6924bd880643f6d2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a904546f6fa7029e7ca07f731a4ff2c5 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_d2219c9567c0450396b82e8a91cc0841 = $(`<div id="html_d2219c9567c0450396b82e8a91cc0841" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #4363d8;">🌍 Immigration Origin</h3>             <b>William T. Lawrence</b><br>             <b>FS ID:</b> LD9T-SS9<br>             <b>Generation:</b> -7<br>             <b>Family Line:</b> Ganson<br>             <b>Origin:</b> Hampshire, England, United Kingdom<br>             <b>Immigration Story:</b><br>             <i>Born in Hampshire, England, United Kingdom, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LD9T-SS9" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_a904546f6fa7029e7ca07f731a4ff2c5.setContent(html_d2219c9567c0450396b82e8a91cc0841);
+            
+        
+
+        marker_c82bdbf6d249e4d13683ba11bdf39f1b.bindPopup(popup_a904546f6fa7029e7ca07f731a4ff2c5)
+        ;
+
+        
+    
+    
+            marker_c82bdbf6d249e4d13683ba11bdf39f1b.bindTooltip(
+                `<div>
+                     William T. Lawrence - Ganson line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c82bdbf6d249e4d13683ba11bdf39f1b.setIcon(icon_e37f7e80b95b788c6924bd880643f6d2);
+            
+    
+            var marker_370bd79766383f9064e788637eeb43a2 = L.marker(
+                [52.865196, -7.9794599],
+                {
+}
+            ).addTo(marker_cluster_34a5af5d7d4c26b9430ff19f7aeb7a5a);
+        
+    
+            var icon_bb4d741d20ca65116b90d6f5ae3bfdc1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f164d978f60b95103cb26f2648c18386 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c5b9e246f8fb70af7aace9ce984e3496 = $(`<div id="html_c5b9e246f8fb70af7aace9ce984e3496" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #4363d8;">🌍 Immigration Origin</h3>             <b>peggy</b><br>             <b>FS ID:</b> GVNQ-6LZ<br>             <b>Generation:</b> -7<br>             <b>Family Line:</b> Ganson<br>             <b>Origin:</b> Ireland<br>             <b>Immigration Story:</b><br>             <i>Had events in Ireland, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/GVNQ-6LZ" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_f164d978f60b95103cb26f2648c18386.setContent(html_c5b9e246f8fb70af7aace9ce984e3496);
+            
+        
+
+        marker_370bd79766383f9064e788637eeb43a2.bindPopup(popup_f164d978f60b95103cb26f2648c18386)
+        ;
+
+        
+    
+    
+            marker_370bd79766383f9064e788637eeb43a2.bindTooltip(
+                `<div>
+                     peggy - Ganson line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_370bd79766383f9064e788637eeb43a2.setIcon(icon_bb4d741d20ca65116b90d6f5ae3bfdc1);
+            
+    
+            marker_cluster_34a5af5d7d4c26b9430ff19f7aeb7a5a.addTo(map_f042e296642aa1f6abbd33147719b829);
+        
+    
+            var marker_cluster_b7811432a00369f13cbd1fc50012a3ee = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_71ac5b910e5cfbc52d156dd13ce6c2b1 = L.marker(
+                [49.4871968, 31.2718321],
+                {
+}
+            ).addTo(marker_cluster_b7811432a00369f13cbd1fc50012a3ee);
+        
+    
+            var icon_83883eb03d381d87fdeaea3435fcee63 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7749af6cb37bdb5748207d0811f6aef7 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_bf0b42a1d4485c2ce4fc8ef1196e89b5 = $(`<div id="html_bf0b42a1d4485c2ce4fc8ef1196e89b5" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f58231;">🌍 Immigration Origin</h3>             <b>Heinrich "Henry" H. Sommerfeld</b><br>             <b>FS ID:</b> MFB8-QYG<br>             <b>Generation:</b> -3<br>             <b>Family Line:</b> Sommerfeld<br>             <b>Origin:</b> Ukraine<br>             <b>Immigration Story:</b><br>             <i>Born in Ukraine, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/MFB8-QYG" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_7749af6cb37bdb5748207d0811f6aef7.setContent(html_bf0b42a1d4485c2ce4fc8ef1196e89b5);
+            
+        
+
+        marker_71ac5b910e5cfbc52d156dd13ce6c2b1.bindPopup(popup_7749af6cb37bdb5748207d0811f6aef7)
+        ;
+
+        
+    
+    
+            marker_71ac5b910e5cfbc52d156dd13ce6c2b1.bindTooltip(
+                `<div>
+                     Heinrich "Henry" H. Sommerfeld - Sommerfeld line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_71ac5b910e5cfbc52d156dd13ce6c2b1.setIcon(icon_83883eb03d381d87fdeaea3435fcee63);
+            
+    
+            var marker_a30a3c9447fc45a3bec7c91a370e809f = L.marker(
+                [64.6863136, 97.7453061],
+                {
+}
+            ).addTo(marker_cluster_b7811432a00369f13cbd1fc50012a3ee);
+        
+    
+            var icon_1d857126ca7360b17ededd6a2d3750f4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_243e8a26f69d54282207eab82ee1bfa2 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_60589f4b286ae86bdb8827be40f304da = $(`<div id="html_60589f4b286ae86bdb8827be40f304da" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f58231;">🌍 Immigration Origin</h3>             <b>Margaret Esau</b><br>             <b>FS ID:</b> LZLB-V6V<br>             <b>Generation:</b> -5<br>             <b>Family Line:</b> Sommerfeld<br>             <b>Origin:</b> Russia<br>             <b>Immigration Story:</b><br>             <i>Had events in Russia, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LZLB-V6V" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_243e8a26f69d54282207eab82ee1bfa2.setContent(html_60589f4b286ae86bdb8827be40f304da);
+            
+        
+
+        marker_a30a3c9447fc45a3bec7c91a370e809f.bindPopup(popup_243e8a26f69d54282207eab82ee1bfa2)
+        ;
+
+        
+    
+    
+            marker_a30a3c9447fc45a3bec7c91a370e809f.bindTooltip(
+                `<div>
+                     Margaret Esau - Sommerfeld line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a30a3c9447fc45a3bec7c91a370e809f.setIcon(icon_1d857126ca7360b17ededd6a2d3750f4);
+            
+    
+            var marker_b73aa6642a3eb07c33fe23043185bf6c = L.marker(
+                [52.5172596, 13.3927444],
+                {
+}
+            ).addTo(marker_cluster_b7811432a00369f13cbd1fc50012a3ee);
+        
+    
+            var icon_f1dde7b30b45751a5dda7e96d330ef74 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_792c677bac5b26d3ed98e3ba0fb939f1 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c2b52bea3bdafb1f9422492991d757e3 = $(`<div id="html_c2b52bea3bdafb1f9422492991d757e3" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f58231;">🌍 Immigration Origin</h3>             <b>Heinrich Sommerfeld</b><br>             <b>FS ID:</b> KJ5H-JV2<br>             <b>Generation:</b> -6<br>             <b>Family Line:</b> Sommerfeld<br>             <b>Origin:</b> Prussia, Germany<br>             <b>Immigration Story:</b><br>             <i>Had events in Prussia, Germany, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/KJ5H-JV2" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_792c677bac5b26d3ed98e3ba0fb939f1.setContent(html_c2b52bea3bdafb1f9422492991d757e3);
+            
+        
+
+        marker_b73aa6642a3eb07c33fe23043185bf6c.bindPopup(popup_792c677bac5b26d3ed98e3ba0fb939f1)
+        ;
+
+        
+    
+    
+            marker_b73aa6642a3eb07c33fe23043185bf6c.bindTooltip(
+                `<div>
+                     Heinrich Sommerfeld - Sommerfeld line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b73aa6642a3eb07c33fe23043185bf6c.setIcon(icon_f1dde7b30b45751a5dda7e96d330ef74);
+            
+    
+            var marker_e00601ede8f53ab549ce9550e7d3c8d2 = L.marker(
+                [64.6863136, 97.7453061],
+                {
+}
+            ).addTo(marker_cluster_b7811432a00369f13cbd1fc50012a3ee);
+        
+    
+            var icon_ba97995d1294f6438f977fe98b908648 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fa036fcdaaaede83d4f7e3e31ad388d6 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ac15d6575aa6da85820305757dad36e1 = $(`<div id="html_ac15d6575aa6da85820305757dad36e1" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f58231;">🌍 Immigration Origin</h3>             <b>Sommerfeld</b><br>             <b>FS ID:</b> 9F3X-11J<br>             <b>Generation:</b> -6<br>             <b>Family Line:</b> Sommerfeld<br>             <b>Origin:</b> Russia<br>             <b>Immigration Story:</b><br>             <i>Had events in Russia, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/9F3X-11J" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_fa036fcdaaaede83d4f7e3e31ad388d6.setContent(html_ac15d6575aa6da85820305757dad36e1);
+            
+        
+
+        marker_e00601ede8f53ab549ce9550e7d3c8d2.bindPopup(popup_fa036fcdaaaede83d4f7e3e31ad388d6)
+        ;
+
+        
+    
+    
+            marker_e00601ede8f53ab549ce9550e7d3c8d2.bindTooltip(
+                `<div>
+                     Sommerfeld - Sommerfeld line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e00601ede8f53ab549ce9550e7d3c8d2.setIcon(icon_ba97995d1294f6438f977fe98b908648);
+            
+    
+            var marker_9f831e90c5033862bfd5d4a9952d9af7 = L.marker(
+                [49.4871968, 31.2718321],
+                {
+}
+            ).addTo(marker_cluster_b7811432a00369f13cbd1fc50012a3ee);
+        
+    
+            var icon_ddab6fb437cf268fabaf4fde7a48d989 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a59d090ba7fb7d2a1793f3f73d2fc0f5 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_afd0719a0663ad31d8f5f876b38402f4 = $(`<div id="html_afd0719a0663ad31d8f5f876b38402f4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f58231;">🌍 Immigration Origin</h3>             <b>Peter Voth</b><br>             <b>FS ID:</b> LCFF-KC7<br>             <b>Generation:</b> -6<br>             <b>Family Line:</b> Sommerfeld<br>             <b>Origin:</b> Ukraine<br>             <b>Immigration Story:</b><br>             <i>Had events in Ukraine, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LCFF-KC7" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_a59d090ba7fb7d2a1793f3f73d2fc0f5.setContent(html_afd0719a0663ad31d8f5f876b38402f4);
+            
+        
+
+        marker_9f831e90c5033862bfd5d4a9952d9af7.bindPopup(popup_a59d090ba7fb7d2a1793f3f73d2fc0f5)
+        ;
+
+        
+    
+    
+            marker_9f831e90c5033862bfd5d4a9952d9af7.bindTooltip(
+                `<div>
+                     Peter Voth - Sommerfeld line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9f831e90c5033862bfd5d4a9952d9af7.setIcon(icon_ddab6fb437cf268fabaf4fde7a48d989);
+            
+    
+            var marker_2d01852f29bd18e0a62afdd4f78c6bc8 = L.marker(
+                [52.215933, 19.134422],
+                {
+}
+            ).addTo(marker_cluster_b7811432a00369f13cbd1fc50012a3ee);
+        
+    
+            var icon_60404e77f64f73daf03f5f7fd62b2d03 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3b66db8099c5316436bbd3bcbb3eb820 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ed2115bdb347ba39cc580f11e860e55e = $(`<div id="html_ed2115bdb347ba39cc580f11e860e55e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f58231;">🌍 Immigration Origin</h3>             <b>Adam Ratzlaff</b><br>             <b>FS ID:</b> LZJB-54K<br>             <b>Generation:</b> -7<br>             <b>Family Line:</b> Sommerfeld<br>             <b>Origin:</b> Poland<br>             <b>Immigration Story:</b><br>             <i>Had events in Poland, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LZJB-54K" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_3b66db8099c5316436bbd3bcbb3eb820.setContent(html_ed2115bdb347ba39cc580f11e860e55e);
+            
+        
+
+        marker_2d01852f29bd18e0a62afdd4f78c6bc8.bindPopup(popup_3b66db8099c5316436bbd3bcbb3eb820)
+        ;
+
+        
+    
+    
+            marker_2d01852f29bd18e0a62afdd4f78c6bc8.bindTooltip(
+                `<div>
+                     Adam Ratzlaff - Sommerfeld line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2d01852f29bd18e0a62afdd4f78c6bc8.setIcon(icon_60404e77f64f73daf03f5f7fd62b2d03);
+            
+    
+            marker_cluster_b7811432a00369f13cbd1fc50012a3ee.addTo(map_f042e296642aa1f6abbd33147719b829);
+        
+    
+            var marker_cluster_94524e25f9360e78a7e15c39cda8368a = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_8572b0272148051e5e8e370707a75b0b = L.marker(
+                [51.1638175, 10.4478313],
+                {
+}
+            ).addTo(marker_cluster_94524e25f9360e78a7e15c39cda8368a);
+        
+    
+            var icon_15b330b41ed0105d40223b474cbe1c9a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_90a63d76b1c7c1b796d3809a5b6eb3c4 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_517bc12711e08f221ce0f5f4eb3ac8c8 = $(`<div id="html_517bc12711e08f221ce0f5f4eb3ac8c8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #911eb4;">🌍 Immigration Origin</h3>             <b>Henry Smith</b><br>             <b>FS ID:</b> KCKF-XCL<br>             <b>Generation:</b> -4<br>             <b>Family Line:</b> Smith<br>             <b>Origin:</b> Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/KCKF-XCL" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_90a63d76b1c7c1b796d3809a5b6eb3c4.setContent(html_517bc12711e08f221ce0f5f4eb3ac8c8);
+            
+        
+
+        marker_8572b0272148051e5e8e370707a75b0b.bindPopup(popup_90a63d76b1c7c1b796d3809a5b6eb3c4)
+        ;
+
+        
+    
+    
+            marker_8572b0272148051e5e8e370707a75b0b.bindTooltip(
+                `<div>
+                     Henry Smith - Smith line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8572b0272148051e5e8e370707a75b0b.setIcon(icon_15b330b41ed0105d40223b474cbe1c9a);
+            
+    
+            var marker_488eeb15c99f468023013c56d2271a22 = L.marker(
+                [51.1638175, 10.4478313],
+                {
+}
+            ).addTo(marker_cluster_94524e25f9360e78a7e15c39cda8368a);
+        
+    
+            var icon_ac9e22eba5b6eda699f7a95953af12db = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e3871b89e3ace7da696a453b7c42853a = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_dd54c292a8fab406b795e4ca650c0e30 = $(`<div id="html_dd54c292a8fab406b795e4ca650c0e30" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #911eb4;">🌍 Immigration Origin</h3>             <b>philip smith</b><br>             <b>FS ID:</b> G222-G91<br>             <b>Generation:</b> -5<br>             <b>Family Line:</b> Smith<br>             <b>Origin:</b> Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/G222-G91" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_e3871b89e3ace7da696a453b7c42853a.setContent(html_dd54c292a8fab406b795e4ca650c0e30);
+            
+        
+
+        marker_488eeb15c99f468023013c56d2271a22.bindPopup(popup_e3871b89e3ace7da696a453b7c42853a)
+        ;
+
+        
+    
+    
+            marker_488eeb15c99f468023013c56d2271a22.bindTooltip(
+                `<div>
+                     philip smith - Smith line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_488eeb15c99f468023013c56d2271a22.setIcon(icon_ac9e22eba5b6eda699f7a95953af12db);
+            
+    
+            var marker_c560af2ff8686da3e10b1a1a3428780d = L.marker(
+                [51.1638175, 10.4478313],
+                {
+}
+            ).addTo(marker_cluster_94524e25f9360e78a7e15c39cda8368a);
+        
+    
+            var icon_16d10e5da3236a75e8d5246a86de08e8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dc755e3ed906a11929ddd7ec99ba63b6 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_279727489b73950b20c2320a04965463 = $(`<div id="html_279727489b73950b20c2320a04965463" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #911eb4;">🌍 Immigration Origin</h3>             <b>susan smith</b><br>             <b>FS ID:</b> G222-P3T<br>             <b>Generation:</b> -5<br>             <b>Family Line:</b> Smith<br>             <b>Origin:</b> Germany<br>             <b>Immigration Story:</b><br>             <i>Had events in Germany, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/G222-P3T" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_dc755e3ed906a11929ddd7ec99ba63b6.setContent(html_279727489b73950b20c2320a04965463);
+            
+        
+
+        marker_c560af2ff8686da3e10b1a1a3428780d.bindPopup(popup_dc755e3ed906a11929ddd7ec99ba63b6)
+        ;
+
+        
+    
+    
+            marker_c560af2ff8686da3e10b1a1a3428780d.bindTooltip(
+                `<div>
+                     susan smith - Smith line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c560af2ff8686da3e10b1a1a3428780d.setIcon(icon_16d10e5da3236a75e8d5246a86de08e8);
+            
+    
+            marker_cluster_94524e25f9360e78a7e15c39cda8368a.addTo(map_f042e296642aa1f6abbd33147719b829);
+        
+    
+            var marker_cluster_f32e34930136a04d1d7ba25888f41fc3 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_ad2df16fa0e2b1c1eafa09ad70db5e29 = L.marker(
+                [48.1371079, 11.5753822],
+                {
+}
+            ).addTo(marker_cluster_f32e34930136a04d1d7ba25888f41fc3);
+        
+    
+            var icon_6771cae450dae8526b64a1d3619e3aa6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_847aa8cd6808dde6bcf3e39f16966384 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_0e6fc63efe0de9bd7390ded1ae79bd2d = $(`<div id="html_0e6fc63efe0de9bd7390ded1ae79bd2d" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #46f0f0;">🌍 Immigration Origin</h3>             <b>Jacob A. Auernheimer</b><br>             <b>FS ID:</b> L7NK-X97<br>             <b>Generation:</b> -4<br>             <b>Family Line:</b> Auernheimer<br>             <b>Origin:</b> Munich, Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Munich, Bavaria, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/L7NK-X97" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_847aa8cd6808dde6bcf3e39f16966384.setContent(html_0e6fc63efe0de9bd7390ded1ae79bd2d);
+            
+        
+
+        marker_ad2df16fa0e2b1c1eafa09ad70db5e29.bindPopup(popup_847aa8cd6808dde6bcf3e39f16966384)
+        ;
+
+        
+    
+    
+            marker_ad2df16fa0e2b1c1eafa09ad70db5e29.bindTooltip(
+                `<div>
+                     Jacob A. Auernheimer - Auernheimer line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ad2df16fa0e2b1c1eafa09ad70db5e29.setIcon(icon_6771cae450dae8526b64a1d3619e3aa6);
+            
+    
+            var marker_53f85d7320eaf2ebf8bc771727a2f2ec = L.marker(
+                [49.2046969, 10.5484911],
+                {
+}
+            ).addTo(marker_cluster_f32e34930136a04d1d7ba25888f41fc3);
+        
+    
+            var icon_04cd6dfc9419f7eb6e24ac3c41efcf77 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4edf37a45d8fff5e0add3f59db985738 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_e25493110e45ea314ecc62993ec1e0ca = $(`<div id="html_e25493110e45ea314ecc62993ec1e0ca" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #46f0f0;">🌍 Immigration Origin</h3>             <b>Susanna Seitz</b><br>             <b>FS ID:</b> KF1F-QJK<br>             <b>Generation:</b> -4<br>             <b>Family Line:</b> Auernheimer<br>             <b>Origin:</b> Thann, Bayern, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Thann, Bayern, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/KF1F-QJK" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_4edf37a45d8fff5e0add3f59db985738.setContent(html_e25493110e45ea314ecc62993ec1e0ca);
+            
+        
+
+        marker_53f85d7320eaf2ebf8bc771727a2f2ec.bindPopup(popup_4edf37a45d8fff5e0add3f59db985738)
+        ;
+
+        
+    
+    
+            marker_53f85d7320eaf2ebf8bc771727a2f2ec.bindTooltip(
+                `<div>
+                     Susanna Seitz - Auernheimer line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_53f85d7320eaf2ebf8bc771727a2f2ec.setIcon(icon_04cd6dfc9419f7eb6e24ac3c41efcf77);
+            
+    
+            var marker_ec11d2ff6c4d123eea3fab1d8ea333ff = L.marker(
+                [48.9826202, 10.8819593],
+                {
+}
+            ).addTo(marker_cluster_f32e34930136a04d1d7ba25888f41fc3);
+        
+    
+            var icon_61cfa8ca627c411c5e3de6e11e0658f6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2bafbd604941a411e39396c00b388c35 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_3fbcd8aa576b935c3a24997fb1e7a43d = $(`<div id="html_3fbcd8aa576b935c3a24997fb1e7a43d" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #46f0f0;">🌍 Immigration Origin</h3>             <b>Johann Christian Auernheimer</b><br>             <b>FS ID:</b> L754-2R6<br>             <b>Generation:</b> -5<br>             <b>Family Line:</b> Auernheimer<br>             <b>Origin:</b> Wettelsheim, Treuchtlingen, Weißenburg-Gunzenhausen, Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Wettelsheim, Treuchtlingen, Weißenburg-Gunzenhausen, Bavaria, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/L754-2R6" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_2bafbd604941a411e39396c00b388c35.setContent(html_3fbcd8aa576b935c3a24997fb1e7a43d);
+            
+        
+
+        marker_ec11d2ff6c4d123eea3fab1d8ea333ff.bindPopup(popup_2bafbd604941a411e39396c00b388c35)
+        ;
+
+        
+    
+    
+            marker_ec11d2ff6c4d123eea3fab1d8ea333ff.bindTooltip(
+                `<div>
+                     Johann Christian Auernheimer - Auernheimer line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ec11d2ff6c4d123eea3fab1d8ea333ff.setIcon(icon_61cfa8ca627c411c5e3de6e11e0658f6);
+            
+    
+            var marker_a97327aba73a32d2cfa1372050144cd6 = L.marker(
+                [51.1638175, 10.4478313],
+                {
+}
+            ).addTo(marker_cluster_f32e34930136a04d1d7ba25888f41fc3);
+        
+    
+            var icon_3d48702de34b71295fa1566525a8e18a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eaf32173af2c2d4868b91e77f471ced7 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_b4505462bb4531c45ad9189ea3ed56f2 = $(`<div id="html_b4505462bb4531c45ad9189ea3ed56f2" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #46f0f0;">🌍 Immigration Origin</h3>             <b>Elisabeth Schmitt</b><br>             <b>FS ID:</b> L754-5XT<br>             <b>Generation:</b> -5<br>             <b>Family Line:</b> Auernheimer<br>             <b>Origin:</b> Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/L754-5XT" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_eaf32173af2c2d4868b91e77f471ced7.setContent(html_b4505462bb4531c45ad9189ea3ed56f2);
+            
+        
+
+        marker_a97327aba73a32d2cfa1372050144cd6.bindPopup(popup_eaf32173af2c2d4868b91e77f471ced7)
+        ;
+
+        
+    
+    
+            marker_a97327aba73a32d2cfa1372050144cd6.bindTooltip(
+                `<div>
+                     Elisabeth Schmitt - Auernheimer line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a97327aba73a32d2cfa1372050144cd6.setIcon(icon_3d48702de34b71295fa1566525a8e18a);
+            
+    
+            var marker_6ba95a6b7771d1f243a2f1efaeb0f5e9 = L.marker(
+                [48.8594753, 10.3180772],
+                {
+}
+            ).addTo(marker_cluster_f32e34930136a04d1d7ba25888f41fc3);
+        
+    
+            var icon_8875191658cb712294e76af1d592f0eb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_656795c0c9a0af1098f054c0b9c71564 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_246648add8ae94efe659003ab48524a5 = $(`<div id="html_246648add8ae94efe659003ab48524a5" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #46f0f0;">🌍 Immigration Origin</h3>             <b>Abraham Seitz</b><br>             <b>FS ID:</b> KF1F-QFC<br>             <b>Generation:</b> -5<br>             <b>Family Line:</b> Auernheimer<br>             <b>Origin:</b> Aufhausen, Bopfingen, Ostalbkreis, Baden-Württemberg, Germany<br>             <b>Immigration Story:</b><br>             <i>Had events in Aufhausen, Bopfingen, Ostalbkreis, Baden-Württemberg, Germany, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/KF1F-QFC" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_656795c0c9a0af1098f054c0b9c71564.setContent(html_246648add8ae94efe659003ab48524a5);
+            
+        
+
+        marker_6ba95a6b7771d1f243a2f1efaeb0f5e9.bindPopup(popup_656795c0c9a0af1098f054c0b9c71564)
+        ;
+
+        
+    
+    
+            marker_6ba95a6b7771d1f243a2f1efaeb0f5e9.bindTooltip(
+                `<div>
+                     Abraham Seitz - Auernheimer line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6ba95a6b7771d1f243a2f1efaeb0f5e9.setIcon(icon_8875191658cb712294e76af1d592f0eb);
+            
+    
+            var marker_3932f7cfbf3e19d0161d1b30e6d8a82a = L.marker(
+                [48.8726932, 12.283701],
+                {
+}
+            ).addTo(marker_cluster_f32e34930136a04d1d7ba25888f41fc3);
+        
+    
+            var icon_4ad74b91856be0d6f938770161372848 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_34b0506ac561f9fb1f3e865e57a94e7b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_5fb61c41e64574f0e8574b6965c461fe = $(`<div id="html_5fb61c41e64574f0e8574b6965c461fe" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #46f0f0;">🌍 Immigration Origin</h3>             <b>Barbara Janson</b><br>             <b>FS ID:</b> KF1F-QFG<br>             <b>Generation:</b> -5<br>             <b>Family Line:</b> Auernheimer<br>             <b>Origin:</b> Aufhausen, Germany<br>             <b>Immigration Story:</b><br>             <i>Had events in Aufhausen, Germany, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/KF1F-QFG" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_34b0506ac561f9fb1f3e865e57a94e7b.setContent(html_5fb61c41e64574f0e8574b6965c461fe);
+            
+        
+
+        marker_3932f7cfbf3e19d0161d1b30e6d8a82a.bindPopup(popup_34b0506ac561f9fb1f3e865e57a94e7b)
+        ;
+
+        
+    
+    
+            marker_3932f7cfbf3e19d0161d1b30e6d8a82a.bindTooltip(
+                `<div>
+                     Barbara Janson - Auernheimer line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3932f7cfbf3e19d0161d1b30e6d8a82a.setIcon(icon_4ad74b91856be0d6f938770161372848);
+            
+    
+            var marker_57ef167266eb544fe0694c02717b50a5 = L.marker(
+                [48.9826202, 10.8819593],
+                {
+}
+            ).addTo(marker_cluster_f32e34930136a04d1d7ba25888f41fc3);
+        
+    
+            var icon_62c778dc4471e83fe39d34a02abf7600 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b7fb5f7e6dbde289e57783843a90904b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_88ddbdacc60e742f249afc0f25c823eb = $(`<div id="html_88ddbdacc60e742f249afc0f25c823eb" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #46f0f0;">🌍 Immigration Origin</h3>             <b>Georg Christoph Auernheimer</b><br>             <b>FS ID:</b> KZ41-SJP<br>             <b>Generation:</b> -6<br>             <b>Family Line:</b> Auernheimer<br>             <b>Origin:</b> Wettelsheim, Treuchtlingen, Weißenburg-Gunzenhausen, Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Had events in Wettelsheim, Treuchtlingen, Weißenburg-Gunzenhausen, Bavaria, Germany, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/KZ41-SJP" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_b7fb5f7e6dbde289e57783843a90904b.setContent(html_88ddbdacc60e742f249afc0f25c823eb);
+            
+        
+
+        marker_57ef167266eb544fe0694c02717b50a5.bindPopup(popup_b7fb5f7e6dbde289e57783843a90904b)
+        ;
+
+        
+    
+    
+            marker_57ef167266eb544fe0694c02717b50a5.bindTooltip(
+                `<div>
+                     Georg Christoph Auernheimer - Auernheimer line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_57ef167266eb544fe0694c02717b50a5.setIcon(icon_62c778dc4471e83fe39d34a02abf7600);
+            
+    
+            var marker_718d37f18b9821a3c02385c2dc262799 = L.marker(
+                [48.4694155, 11.7874445],
+                {
+}
+            ).addTo(marker_cluster_f32e34930136a04d1d7ba25888f41fc3);
+        
+    
+            var icon_f4da4beefd7dd3f5eae9e63de3c51dae = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_036c63dc92b5454d727ee4c9f09bc549 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_949bba7780194fb88c19d5515bdb64e4 = $(`<div id="html_949bba7780194fb88c19d5515bdb64e4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #46f0f0;">🌍 Immigration Origin</h3>             <b>Maria Strohm</b><br>             <b>FS ID:</b> L7JX-C35<br>             <b>Generation:</b> -6<br>             <b>Family Line:</b> Auernheimer<br>             <b>Origin:</b> Thann, Zolling, Freising, Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Had events in Thann, Zolling, Freising, Bavaria, Germany, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/L7JX-C35" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_036c63dc92b5454d727ee4c9f09bc549.setContent(html_949bba7780194fb88c19d5515bdb64e4);
+            
+        
+
+        marker_718d37f18b9821a3c02385c2dc262799.bindPopup(popup_036c63dc92b5454d727ee4c9f09bc549)
+        ;
+
+        
+    
+    
+            marker_718d37f18b9821a3c02385c2dc262799.bindTooltip(
+                `<div>
+                     Maria Strohm - Auernheimer line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_718d37f18b9821a3c02385c2dc262799.setIcon(icon_f4da4beefd7dd3f5eae9e63de3c51dae);
+            
+    
+            marker_cluster_f32e34930136a04d1d7ba25888f41fc3.addTo(map_f042e296642aa1f6abbd33147719b829);
+        
+    
+            var marker_cluster_5660728c0ba367faa9bc5795d1704b47 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_63b9e5061d0c88046f43d21044beb62c = L.marker(
+                [48.4640557, 11.4307105],
+                {
+}
+            ).addTo(marker_cluster_5660728c0ba367faa9bc5795d1704b47);
+        
+    
+            var icon_ce10a0d5ffe175fe01d0b59409b4072c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f7dee879a1e7f086b3a04dcaa9c4f3bf = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c95aa588185d237c5d1ea4f32470d524 = $(`<div id="html_c95aa588185d237c5d1ea4f32470d524" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f032e6;">🌍 Immigration Origin</h3>             <b>Jacob C. Dester</b><br>             <b>FS ID:</b> LVT6-6L9<br>             <b>Generation:</b> -4<br>             <b>Family Line:</b> Dester<br>             <b>Origin:</b> Edersberg, Scheyern, Pfaffenhofen, Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Edersberg, Scheyern, Pfaffenhofen, Bavaria, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LVT6-6L9" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_f7dee879a1e7f086b3a04dcaa9c4f3bf.setContent(html_c95aa588185d237c5d1ea4f32470d524);
+            
+        
+
+        marker_63b9e5061d0c88046f43d21044beb62c.bindPopup(popup_f7dee879a1e7f086b3a04dcaa9c4f3bf)
+        ;
+
+        
+    
+    
+            marker_63b9e5061d0c88046f43d21044beb62c.bindTooltip(
+                `<div>
+                     Jacob C. Dester - Dester line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_63b9e5061d0c88046f43d21044beb62c.setIcon(icon_ce10a0d5ffe175fe01d0b59409b4072c);
+            
+    
+            var marker_0284e24ad508b05bb3f453a143d15308 = L.marker(
+                [48.9467562, 11.4038717],
+                {
+}
+            ).addTo(marker_cluster_5660728c0ba367faa9bc5795d1704b47);
+        
+    
+            var icon_5dd5be1c90fbed6b7c590f3b9efec7d6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e58ad71cfc025cd71a126a78e5856a4d = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c9af974c691e5e47ab906ee1bc3d0955 = $(`<div id="html_c9af974c691e5e47ab906ee1bc3d0955" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f032e6;">🌍 Immigration Origin</h3>             <b>Mary Schmitt</b><br>             <b>FS ID:</b> LK71-QMT<br>             <b>Generation:</b> -5<br>             <b>Family Line:</b> Dester<br>             <b>Origin:</b> Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Bavaria, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LK71-QMT" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_e58ad71cfc025cd71a126a78e5856a4d.setContent(html_c9af974c691e5e47ab906ee1bc3d0955);
+            
+        
+
+        marker_0284e24ad508b05bb3f453a143d15308.bindPopup(popup_e58ad71cfc025cd71a126a78e5856a4d)
+        ;
+
+        
+    
+    
+            marker_0284e24ad508b05bb3f453a143d15308.bindTooltip(
+                `<div>
+                     Mary Schmitt - Dester line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0284e24ad508b05bb3f453a143d15308.setIcon(icon_5dd5be1c90fbed6b7c590f3b9efec7d6);
+            
+    
+            var marker_59a8badb8f561156231d497bf89eb863 = L.marker(
+                [49.7656495, 8.341793],
+                {
+}
+            ).addTo(marker_cluster_5660728c0ba367faa9bc5795d1704b47);
+        
+    
+            var icon_11b546f1ba3d1a81395fff4acc43d9fd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_493f06e570e6e06c9dcfc2fd1f09ee80 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_a991302df037b0403b2718d446d91c17 = $(`<div id="html_a991302df037b0403b2718d446d91c17" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f032e6;">🌍 Immigration Origin</h3>             <b>Anna Rings</b><br>             <b>FS ID:</b> LH3V-LPY<br>             <b>Generation:</b> -5<br>             <b>Family Line:</b> Dester<br>             <b>Origin:</b> Alsheim, Alzey-Worms, Rhineland-Palatinate, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Alsheim, Alzey-Worms, Rhineland-Palatinate, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LH3V-LPY" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_493f06e570e6e06c9dcfc2fd1f09ee80.setContent(html_a991302df037b0403b2718d446d91c17);
+            
+        
+
+        marker_59a8badb8f561156231d497bf89eb863.bindPopup(popup_493f06e570e6e06c9dcfc2fd1f09ee80)
+        ;
+
+        
+    
+    
+            marker_59a8badb8f561156231d497bf89eb863.bindTooltip(
+                `<div>
+                     Anna Rings - Dester line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_59a8badb8f561156231d497bf89eb863.setIcon(icon_11b546f1ba3d1a81395fff4acc43d9fd);
+            
+    
+            var marker_5b034b7454a2a058faff2a5b1b783770 = L.marker(
+                [51.1638175, 10.4478313],
+                {
+}
+            ).addTo(marker_cluster_5660728c0ba367faa9bc5795d1704b47);
+        
+    
+            var icon_43ae15e38a43cfadbf9150bc13737f20 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3990a25ea44e1d0885786554e2c3b21e = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_d941a9c45623a3012aca7ac6f954a258 = $(`<div id="html_d941a9c45623a3012aca7ac6f954a258" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f032e6;">🌍 Immigration Origin</h3>             <b>Christian Hirstein</b><br>             <b>FS ID:</b> KZSG-8RD<br>             <b>Generation:</b> -6<br>             <b>Family Line:</b> Dester<br>             <b>Origin:</b> Germany<br>             <b>Immigration Story:</b><br>             <i>Had events in Germany, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/KZSG-8RD" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_3990a25ea44e1d0885786554e2c3b21e.setContent(html_d941a9c45623a3012aca7ac6f954a258);
+            
+        
+
+        marker_5b034b7454a2a058faff2a5b1b783770.bindPopup(popup_3990a25ea44e1d0885786554e2c3b21e)
+        ;
+
+        
+    
+    
+            marker_5b034b7454a2a058faff2a5b1b783770.bindTooltip(
+                `<div>
+                     Christian Hirstein - Dester line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5b034b7454a2a058faff2a5b1b783770.setIcon(icon_43ae15e38a43cfadbf9150bc13737f20);
+            
+    
+            var marker_044a621125fa2f40dc1b6761819f0b18 = L.marker(
+                [51.1638175, 10.4478313],
+                {
+}
+            ).addTo(marker_cluster_5660728c0ba367faa9bc5795d1704b47);
+        
+    
+            var icon_3f293170632ad68604d7782495e2327a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b383c57f518579b14f485dade88ea63d = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_2cb90866021935b40e8e1bd87ecc34d9 = $(`<div id="html_2cb90866021935b40e8e1bd87ecc34d9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f032e6;">🌍 Immigration Origin</h3>             <b>Magdalena Bergthold</b><br>             <b>FS ID:</b> K4BB-2PS<br>             <b>Generation:</b> -6<br>             <b>Family Line:</b> Dester<br>             <b>Origin:</b> Germany<br>             <b>Immigration Story:</b><br>             <i>Had events in Germany, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/K4BB-2PS" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_b383c57f518579b14f485dade88ea63d.setContent(html_2cb90866021935b40e8e1bd87ecc34d9);
+            
+        
+
+        marker_044a621125fa2f40dc1b6761819f0b18.bindPopup(popup_b383c57f518579b14f485dade88ea63d)
+        ;
+
+        
+    
+    
+            marker_044a621125fa2f40dc1b6761819f0b18.bindTooltip(
+                `<div>
+                     Magdalena Bergthold - Dester line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_044a621125fa2f40dc1b6761819f0b18.setIcon(icon_3f293170632ad68604d7782495e2327a);
+            
+    
+            var marker_564a5b4c9482cd6aef864e044c0f5895 = L.marker(
+                [48.9467562, 11.4038717],
+                {
+}
+            ).addTo(marker_cluster_5660728c0ba367faa9bc5795d1704b47);
+        
+    
+            var icon_4a7a8eb543963ba24abcc28206f564c7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8ff1bac055e28ebdc49f24f3ccc3b1b4 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_9c8220326daad0460191a10ea45dd051 = $(`<div id="html_9c8220326daad0460191a10ea45dd051" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: #f032e6;">🌍 Immigration Origin</h3>             <b>Elisabeth Bergthold</b><br>             <b>FS ID:</b> L714-9T4<br>             <b>Generation:</b> -6<br>             <b>Family Line:</b> Dester<br>             <b>Origin:</b> Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Had events in Bavaria, Germany, children in US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/L714-9T4" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_8ff1bac055e28ebdc49f24f3ccc3b1b4.setContent(html_9c8220326daad0460191a10ea45dd051);
+            
+        
+
+        marker_564a5b4c9482cd6aef864e044c0f5895.bindPopup(popup_8ff1bac055e28ebdc49f24f3ccc3b1b4)
+        ;
+
+        
+    
+    
+            marker_564a5b4c9482cd6aef864e044c0f5895.bindTooltip(
+                `<div>
+                     Elisabeth Bergthold - Dester line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_564a5b4c9482cd6aef864e044c0f5895.setIcon(icon_4a7a8eb543963ba24abcc28206f564c7);
+            
+    
+            marker_cluster_5660728c0ba367faa9bc5795d1704b47.addTo(map_f042e296642aa1f6abbd33147719b829);
+        
+    
+            var marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_8f60ce66e7a7c554341c91b365c100d4 = L.marker(
+                [64.6863136, 97.7453061],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_af36662dcbf129097e96afd32c986eec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_95094f6047312c695041d18cb9917e3b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_004cdb424382461f1eb6f54cc76fe168 = $(`<div id="html_004cdb424382461f1eb6f54cc76fe168" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Susanna Sommerfeld</b><br>             <b>FS ID:</b> LC7C-WVD<br>             <b>Generation:</b> -4<br>                          <b>Origin:</b> Russia<br>             <b>Immigration Story:</b><br>             <i>Born in Russia, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LC7C-WVD" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_95094f6047312c695041d18cb9917e3b.setContent(html_004cdb424382461f1eb6f54cc76fe168);
+            
+        
+
+        marker_8f60ce66e7a7c554341c91b365c100d4.bindPopup(popup_95094f6047312c695041d18cb9917e3b)
+        ;
+
+        
+    
+    
+            marker_8f60ce66e7a7c554341c91b365c100d4.bindTooltip(
+                `<div>
+                     Susanna Sommerfeld -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8f60ce66e7a7c554341c91b365c100d4.setIcon(icon_af36662dcbf129097e96afd32c986eec);
+            
+    
+            var marker_a15ab7cca69dd4df57979f25eb6e9257 = L.marker(
+                [47.4784803, 36.2531412],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_22dfcd0c8629b26063293314f0bbe5fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_89e23e5bb5818f7491dfc2532448595c = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_33d3251438385c119ea6e909140e0066 = $(`<div id="html_33d3251438385c119ea6e909140e0066" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Leonhard Sommerfeld</b><br>             <b>FS ID:</b> LR6B-5NV<br>             <b>Generation:</b> -4<br>                          <b>Origin:</b> Polohy, Zaporizhia, Ukraine<br>             <b>Immigration Story:</b><br>             <i>Born in Polohy, Zaporizhia, Ukraine, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LR6B-5NV" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_89e23e5bb5818f7491dfc2532448595c.setContent(html_33d3251438385c119ea6e909140e0066);
+            
+        
+
+        marker_a15ab7cca69dd4df57979f25eb6e9257.bindPopup(popup_89e23e5bb5818f7491dfc2532448595c)
+        ;
+
+        
+    
+    
+            marker_a15ab7cca69dd4df57979f25eb6e9257.bindTooltip(
+                `<div>
+                     Leonhard Sommerfeld -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a15ab7cca69dd4df57979f25eb6e9257.setIcon(icon_22dfcd0c8629b26063293314f0bbe5fe);
+            
+    
+            var marker_ab4f1a3c2dbb8de20defe14f70b4a142 = L.marker(
+                [64.6863136, 97.7453061],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_9ae746cc36c3cd23987c74eb4c6556bb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ee1a7fe1e9d54303bc6ca4221cb9aece = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_bf9f6447810cba5e3ede2710a385d4fe = $(`<div id="html_bf9f6447810cba5e3ede2710a385d4fe" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Aganetha Sommerfeld</b><br>             <b>FS ID:</b> LZLB-PVY<br>             <b>Generation:</b> -4<br>                          <b>Origin:</b> Russia<br>             <b>Immigration Story:</b><br>             <i>Born in Russia, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LZLB-PVY" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_ee1a7fe1e9d54303bc6ca4221cb9aece.setContent(html_bf9f6447810cba5e3ede2710a385d4fe);
+            
+        
+
+        marker_ab4f1a3c2dbb8de20defe14f70b4a142.bindPopup(popup_ee1a7fe1e9d54303bc6ca4221cb9aece)
+        ;
+
+        
+    
+    
+            marker_ab4f1a3c2dbb8de20defe14f70b4a142.bindTooltip(
+                `<div>
+                     Aganetha Sommerfeld -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ab4f1a3c2dbb8de20defe14f70b4a142.setIcon(icon_9ae746cc36c3cd23987c74eb4c6556bb);
+            
+    
+            var marker_ef6ccd4d96d2fe046e5162e5caacf69d = L.marker(
+                [48.9826202, 10.8819593],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_51229302971086427ab1c43afea40699 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6518a7fadb09543d2e92b392b3ecea39 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_3ee288e804729fe16dadbaaddef4320d = $(`<div id="html_3ee288e804729fe16dadbaaddef4320d" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Maria D. Auernheimer</b><br>             <b>FS ID:</b> KVVH-PQL<br>             <b>Generation:</b> -4<br>                          <b>Origin:</b> Wettelsheim, Treuchtlingen, Weißenburg-Gunzenhausen, Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Wettelsheim, Treuchtlingen, Weißenburg-Gunzenhausen, Bavaria, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/KVVH-PQL" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_6518a7fadb09543d2e92b392b3ecea39.setContent(html_3ee288e804729fe16dadbaaddef4320d);
+            
+        
+
+        marker_ef6ccd4d96d2fe046e5162e5caacf69d.bindPopup(popup_6518a7fadb09543d2e92b392b3ecea39)
+        ;
+
+        
+    
+    
+            marker_ef6ccd4d96d2fe046e5162e5caacf69d.bindTooltip(
+                `<div>
+                     Maria D. Auernheimer -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ef6ccd4d96d2fe046e5162e5caacf69d.setIcon(icon_51229302971086427ab1c43afea40699);
+            
+    
+            var marker_e479780b311458fe970f55303a96abb8 = L.marker(
+                [48.9467562, 11.4038717],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_6ca7a5282a3fca633f122169324bce62 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a9931dc8eb8cd8b4c18f809a7134e0b2 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_b13dd67ae2c77e69e601e358d09a1f23 = $(`<div id="html_b13dd67ae2c77e69e601e358d09a1f23" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Elisabeth A Auernheimer</b><br>             <b>FS ID:</b> LX7K-1MC<br>             <b>Generation:</b> -4<br>                          <b>Origin:</b> Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Bavaria, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LX7K-1MC" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_a9931dc8eb8cd8b4c18f809a7134e0b2.setContent(html_b13dd67ae2c77e69e601e358d09a1f23);
+            
+        
+
+        marker_e479780b311458fe970f55303a96abb8.bindPopup(popup_a9931dc8eb8cd8b4c18f809a7134e0b2)
+        ;
+
+        
+    
+    
+            marker_e479780b311458fe970f55303a96abb8.bindTooltip(
+                `<div>
+                     Elisabeth A Auernheimer -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e479780b311458fe970f55303a96abb8.setIcon(icon_6ca7a5282a3fca633f122169324bce62);
+            
+    
+            var marker_1b84fe1ad144acd50ce57b1966dabfa8 = L.marker(
+                [48.1371079, 11.5753822],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_0d29e3f632e9bbfc2bc7f46787495529 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c8c3ffec8dc844cfad8cba2eeace3598 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_e8bbd3a4c2f98522d9d134093350d2d2 = $(`<div id="html_e8bbd3a4c2f98522d9d134093350d2d2" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Katherina Auernheimer</b><br>             <b>FS ID:</b> 2WGZ-T84<br>             <b>Generation:</b> -4<br>                          <b>Origin:</b> Munich, Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Munich, Bavaria, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/2WGZ-T84" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_c8c3ffec8dc844cfad8cba2eeace3598.setContent(html_e8bbd3a4c2f98522d9d134093350d2d2);
+            
+        
+
+        marker_1b84fe1ad144acd50ce57b1966dabfa8.bindPopup(popup_c8c3ffec8dc844cfad8cba2eeace3598)
+        ;
+
+        
+    
+    
+            marker_1b84fe1ad144acd50ce57b1966dabfa8.bindTooltip(
+                `<div>
+                     Katherina Auernheimer -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1b84fe1ad144acd50ce57b1966dabfa8.setIcon(icon_0d29e3f632e9bbfc2bc7f46787495529);
+            
+    
+            var marker_7cfd5246acedf51510bc0b713ae9370e = L.marker(
+                [50.3223946, 11.0956295],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_1147026a5f7e8a902f4671a7d2e3311c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d75a61c6306a5e4268a39a2294c6ed6e = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c176288124979e178593c58bd6cf496b = $(`<div id="html_c176288124979e178593c58bd6cf496b" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Barbara Seitz</b><br>             <b>FS ID:</b> K2WW-KF5<br>             <b>Generation:</b> -4<br>                          <b>Origin:</b> Thann, Neustadt bei Coburg, Coburg, Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Thann, Neustadt bei Coburg, Coburg, Bavaria, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/K2WW-KF5" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_d75a61c6306a5e4268a39a2294c6ed6e.setContent(html_c176288124979e178593c58bd6cf496b);
+            
+        
+
+        marker_7cfd5246acedf51510bc0b713ae9370e.bindPopup(popup_d75a61c6306a5e4268a39a2294c6ed6e)
+        ;
+
+        
+    
+    
+            marker_7cfd5246acedf51510bc0b713ae9370e.bindTooltip(
+                `<div>
+                     Barbara Seitz -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7cfd5246acedf51510bc0b713ae9370e.setIcon(icon_1147026a5f7e8a902f4671a7d2e3311c);
+            
+    
+            var marker_260ca58b8463c44f4d578ccd73f61a0e = L.marker(
+                [49.2046969, 10.5484911],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_5c64d0f6867b43fd35d16a4be03e1712 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_83732a810b1cc851b7fe8fee6598ad63 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_bcc4d1331a594ffddade129e84bf70d5 = $(`<div id="html_bcc4d1331a594ffddade129e84bf70d5" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Katharina Seitz</b><br>             <b>FS ID:</b> KF1F-Q2X<br>             <b>Generation:</b> -4<br>                          <b>Origin:</b> Thann, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Thann, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/KF1F-Q2X" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_83732a810b1cc851b7fe8fee6598ad63.setContent(html_bcc4d1331a594ffddade129e84bf70d5);
+            
+        
+
+        marker_260ca58b8463c44f4d578ccd73f61a0e.bindPopup(popup_83732a810b1cc851b7fe8fee6598ad63)
+        ;
+
+        
+    
+    
+            marker_260ca58b8463c44f4d578ccd73f61a0e.bindTooltip(
+                `<div>
+                     Katharina Seitz -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_260ca58b8463c44f4d578ccd73f61a0e.setIcon(icon_5c64d0f6867b43fd35d16a4be03e1712);
+            
+    
+            var marker_b8a960124eccfe8cf3e599a7eca2da8a = L.marker(
+                [47.4784803, 36.2531412],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_0afbdfb6bde3103cc322fb75170189f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_43ef5724d2c017ad1e39a5495c312388 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_5693371f373a68447c1d1a8108f64bb5 = $(`<div id="html_5693371f373a68447c1d1a8108f64bb5" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Sara Schroeder</b><br>             <b>FS ID:</b> 27DM-7GB<br>             <b>Generation:</b> -5<br>                          <b>Origin:</b> Polohy, Zaporizhia, Ukraine<br>             <b>Immigration Story:</b><br>             <i>Born in Polohy, Zaporizhia, Ukraine, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/27DM-7GB" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_43ef5724d2c017ad1e39a5495c312388.setContent(html_5693371f373a68447c1d1a8108f64bb5);
+            
+        
+
+        marker_b8a960124eccfe8cf3e599a7eca2da8a.bindPopup(popup_43ef5724d2c017ad1e39a5495c312388)
+        ;
+
+        
+    
+    
+            marker_b8a960124eccfe8cf3e599a7eca2da8a.bindTooltip(
+                `<div>
+                     Sara Schroeder -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b8a960124eccfe8cf3e599a7eca2da8a.setIcon(icon_0afbdfb6bde3103cc322fb75170189f0);
+            
+    
+            var marker_b27d80d72912ef28d3c2927b49579de2 = L.marker(
+                [47.14954, 35.837059],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_0ca5c595360503255034716634e365b6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_52abc69917ceb24e3336e669ded77e4d = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_1de3fabd18f723a234fccc1f6855cafb = $(`<div id="html_1de3fabd18f723a234fccc1f6855cafb" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Helena Voth</b><br>             <b>FS ID:</b> LC1T-B5R<br>             <b>Generation:</b> -5<br>                          <b>Origin:</b> Svitle, Polohy, Zaporizhia, Ukraine<br>             <b>Immigration Story:</b><br>             <i>Born in Svitle, Polohy, Zaporizhia, Ukraine, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LC1T-B5R" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_52abc69917ceb24e3336e669ded77e4d.setContent(html_1de3fabd18f723a234fccc1f6855cafb);
+            
+        
+
+        marker_b27d80d72912ef28d3c2927b49579de2.bindPopup(popup_52abc69917ceb24e3336e669ded77e4d)
+        ;
+
+        
+    
+    
+            marker_b27d80d72912ef28d3c2927b49579de2.bindTooltip(
+                `<div>
+                     Helena Voth -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b27d80d72912ef28d3c2927b49579de2.setIcon(icon_0ca5c595360503255034716634e365b6);
+            
+    
+            var marker_b8989a3dffe99202909e43a97006c844 = L.marker(
+                [44.423953, 34.0547074],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_ef65c4b1b1f795aea2c73c66d5d71d06 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_060454ba70f493f31577c059085e2a19 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_4a292cf3749aa25b8fdf5f0831bea15a = $(`<div id="html_4a292cf3749aa25b8fdf5f0831bea15a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Sara Voth</b><br>             <b>FS ID:</b> 27S4-FM4<br>             <b>Generation:</b> -5<br>                          <b>Origin:</b> Ukraine, Soviet Union<br>             <b>Immigration Story:</b><br>             <i>Born in Ukraine, Soviet Union, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/27S4-FM4" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_060454ba70f493f31577c059085e2a19.setContent(html_4a292cf3749aa25b8fdf5f0831bea15a);
+            
+        
+
+        marker_b8989a3dffe99202909e43a97006c844.bindPopup(popup_060454ba70f493f31577c059085e2a19)
+        ;
+
+        
+    
+    
+            marker_b8989a3dffe99202909e43a97006c844.bindTooltip(
+                `<div>
+                     Sara Voth -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b8989a3dffe99202909e43a97006c844.setIcon(icon_ef65c4b1b1f795aea2c73c66d5d71d06);
+            
+    
+            var marker_6e4d0565cd474703ddb41f1595a72805 = L.marker(
+                [48.9467562, 11.4038717],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_c1ac28e845d1ce75286e9c1acd89a8c2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_73e8beb719bccba6acd7b8af66593f31 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_97dea460bd04880fcf4ab2739bd7d4a7 = $(`<div id="html_97dea460bd04880fcf4ab2739bd7d4a7" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Johannes Rings</b><br>             <b>FS ID:</b> LHGR-TMT<br>             <b>Generation:</b> -5<br>                          <b>Origin:</b> Bavaria, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Bavaria, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/LHGR-TMT" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_73e8beb719bccba6acd7b8af66593f31.setContent(html_97dea460bd04880fcf4ab2739bd7d4a7);
+            
+        
+
+        marker_6e4d0565cd474703ddb41f1595a72805.bindPopup(popup_73e8beb719bccba6acd7b8af66593f31)
+        ;
+
+        
+    
+    
+            marker_6e4d0565cd474703ddb41f1595a72805.bindTooltip(
+                `<div>
+                     Johannes Rings -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6e4d0565cd474703ddb41f1595a72805.setIcon(icon_c1ac28e845d1ce75286e9c1acd89a8c2);
+            
+    
+            var marker_2b05e3ad539b85e11cfcfd35f617924e = L.marker(
+                [49.9531599, 7.310646],
+                {
+}
+            ).addTo(marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c);
+        
+    
+            var icon_ed2643abd7395a56d0a1ffbcc2772cb1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_439f25a5d23fab2dbc6dc81c6d82f633 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_f27b0d24481b9a310062baef19603101 = $(`<div id="html_f27b0d24481b9a310062baef19603101" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 250px;">             <h3 style="margin: 0 0 10px 0; color: gray;">🌍 Immigration Origin</h3>             <b>Daniel Rings</b><br>             <b>FS ID:</b> L4S1-BPG<br>             <b>Generation:</b> -5<br>                          <b>Origin:</b> Rhineland-Palatinate, Germany<br>             <b>Immigration Story:</b><br>             <i>Born in Rhineland-Palatinate, Germany, immigrated to US</i>             <hr style="margin: 10px 0;">             <a href="https://www.familysearch.org/tree/person/details/L4S1-BPG" target="_blank" style="color: #0066cc; text-decoration: none;">🔗 View in FamilySearch</a>         </div>         </div>`)[0];
+                popup_439f25a5d23fab2dbc6dc81c6d82f633.setContent(html_f27b0d24481b9a310062baef19603101);
+            
+        
+
+        marker_2b05e3ad539b85e11cfcfd35f617924e.bindPopup(popup_439f25a5d23fab2dbc6dc81c6d82f633)
+        ;
+
+        
+    
+    
+            marker_2b05e3ad539b85e11cfcfd35f617924e.bindTooltip(
+                `<div>
+                     Daniel Rings -  line
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2b05e3ad539b85e11cfcfd35f617924e.setIcon(icon_ed2643abd7395a56d0a1ffbcc2772cb1);
+            
+    
+            marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c.addTo(map_f042e296642aa1f6abbd33147719b829);
+        
+    
+            var layer_control_fd8de38af8f3db661a6c0890b74bfcdf_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_161b82e85e44c1e03aff2ab289403aa1,
+                },
+                overlays :  {
+                    "\u251c\u2500 1. Frank Kaiser Line" : marker_cluster_3fe5b5093eccd87b979c743f7480af17,
+                    "\u251c\u2500 2. Elizabeth Schwendener Line" : marker_cluster_2575407c08edb6cb4ee0917d0a2becff,
+                    "\u251c\u2500 3. George L. Williams Line" : marker_cluster_f4c87850785ac802ec8a8e001875fa97,
+                    "\u251c\u2500 4. Elinor Ganson Line" : marker_cluster_34a5af5d7d4c26b9430ff19f7aeb7a5a,
+                    "\u251c\u2500 5. Heinrich \"Henry\" H. Sommerfeld Line" : marker_cluster_b7811432a00369f13cbd1fc50012a3ee,
+                    "\u251c\u2500 6. Elva Smith Line" : marker_cluster_94524e25f9360e78a7e15c39cda8368a,
+                    "\u251c\u2500 7. Daniel Auernheimer Line" : marker_cluster_f32e34930136a04d1d7ba25888f41fc3,
+                    "\u251c\u2500 8. Emma Eliza Dester Line" : marker_cluster_5660728c0ba367faa9bc5795d1704b47,
+                    "\u2514\u2500 Unknown Line" : marker_cluster_8cdeeb0cd736e5c00b636a6f97c87a4c,
+                },
+            };
+            let layer_control_fd8de38af8f3db661a6c0890b74bfcdf = L.control.layers(
+                layer_control_fd8de38af8f3db661a6c0890b74bfcdf_layers.base_layers,
+                layer_control_fd8de38af8f3db661a6c0890b74bfcdf_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_f042e296642aa1f6abbd33147719b829);
+
+        
+</script>
+</html>
